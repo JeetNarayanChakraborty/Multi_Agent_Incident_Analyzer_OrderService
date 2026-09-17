@@ -20,4 +20,9 @@ public class OrderService {
     public List<Order> listOrdersForCustomer(String email) {
         return orderRepository.findByCustomerEmail(email);
     }
+
+    @Transactional(readOnly = true)
+    public List<Order> listPendingOrdersForCustomer(String email) {
+        return orderRepository.findByCustomerEmailAndStatus(email, "PENDING");
+    }
 }
